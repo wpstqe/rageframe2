@@ -146,11 +146,10 @@ class PayForm extends PayLog
         }
 
         $log = new PayLog();
-        $log->out_trade_no = date('YmdHis') . StringHelper::random(8, true);
         if ($model->isQueryOrderSn() == true && ($history = Yii::$app->services->pay->findByOrderSn($model->getOrderSn()))) {
             $log = $history;
         }
-
+        $log->out_trade_no = date('YmdHis') . StringHelper::random(8, true);
         $log->attributes = ArrayHelper::toArray($this);
         $log->body = $model->getBody();
         $log->detail = $model->getDetails();
